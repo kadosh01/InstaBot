@@ -1,7 +1,7 @@
 # Time,Schedule and instabot imported
 import os
 import shutil
-
+import datetime
 from instabot import Bot
 import schedule
 import time
@@ -60,10 +60,12 @@ def random_picture():
         src = '{}/{}'.format(POSTED_DIR, os.path.basename(image_name))
         os.rename(remove_me, src)
     for image in album_list:
+        if image_name ==  '{}/{}'.format(POSTS_DIR, image): continue
         os.rename('{}/{}'.format(POSTS_DIR, image), '{}/{}'.format(POSTED_DIR, image))
+    print('{} New image was posted! {}'.format(datetime.datetime.now(),image_name))
 
 if __name__ == '__main__':
-    schedule.every(1).second.do(random_picture)
+    schedule.every(10).hours.do(random_picture)
     while True:
         schedule.run_pending()  # waiting for schedule
-        time.sleep(1)  # countdown 1 second
+        time.sleep(1000)  # countdown 1 second
