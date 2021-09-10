@@ -5,7 +5,6 @@ import shutil
 from instabot import Bot
 import schedule
 import time
-from instagrapi import Client
 import random
 
 # login
@@ -64,7 +63,7 @@ def random_picture():
         os.rename('{}/{}'.format(POSTS_DIR, image), '{}/{}'.format(POSTED_DIR, image))
 
 if __name__ == '__main__':
-    schedule.every(1).second.do(random_picture)
+    schedule.every(1).days.do(random_picture)
     while True:
         schedule.run_pending()  # waiting for schedule
-        time.sleep(1000)  # countdown 1 second
+        time.sleep(1)  # countdown 1 second
