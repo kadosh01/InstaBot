@@ -11,7 +11,7 @@ import random
 usr = "terminal__shoes"  # username
 pwd = "mefeK3ws"  # password
 # dirs paths
-POSTS_DIR = './PostsToUpload/'
+POSTS_DIR = './PostsToUpload'
 POSTED_DIR = './Posted'
 STORY_DIR = './Story'
 # text
@@ -47,7 +47,7 @@ def random_picture():
     success = False
     while not success:
         album_list = getMultiPics(image_path, images_dir_list) # get a package of images associated with the selected image
-        album_path = ['{}{}'.format(POSTS_DIR, pic) for pic in album_list]
+        album_path = ['{}/{}'.format(POSTS_DIR, pic) for pic in album_list]
         text = open(Post_Text_Path, 'r').read() # post caption text
         image_name = album_path.__getitem__(0) # get the first image in list
         album_path.remove(image_name)
@@ -63,7 +63,7 @@ def random_picture():
         os.rename('{}/{}'.format(POSTS_DIR, image), '{}/{}'.format(POSTED_DIR, image))
 
 if __name__ == '__main__':
-    schedule.every(1).days.do(random_picture)
+    schedule.every(1).second.do(random_picture)
     while True:
         schedule.run_pending()  # waiting for schedule
         time.sleep(1)  # countdown 1 second
